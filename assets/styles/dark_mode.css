@@ -1,0 +1,73 @@
+/* =============================================================
+   SIDEBAR
+============================================================= */
+section[data-testid="stSidebar"] {
+    background: #101828 !important;
+    border-right: 1px solid #374151;
+}
+
+
+/* =============================================================
+   NAVBAR
+============================================================= */
+header[data-testid="stHeader"] {
+    background: #141420 !important;
+    border-bottom: 1px solid #374151;
+}
+
+
+/* =============================================================
+   MAIN BACKGROUND
+============================================================= */
+[data-testid="stAppViewContainer"] {
+    background: #1b1b29 !important;
+}
+
+
+/* =============================================================
+   FOOTER
+============================================================= */
+[data-testid="stBottomBlockContainer"] {
+    background: #141420 !important;
+    border-top: 1px solid #374151;
+}
+
+
+/* =============================================================
+   BUTTON STYLE
+============================================================= */
+/* Default button appearance */
+.stButton button {
+    background: #2f3849 !important;
+    border: 1px solid #374151;
+}
+
+/* Button hover state styling */
+.stButton button:hover {
+    background: #3a465c !important;
+    border: 1px solid #374151;
+}
+
+
+/* =============================================================
+   HIGHLIGHT CHAT INPUT WHEN FOCUSED
+============================================================= */
+[data-testid="stChatInput"]:focus-within {
+    box-shadow: 0 0 0 2px #222d40 !important;
+}
+
+
+/* =============================================================
+   USER CHAT MESSAGE BACKGROUND
+============================================================= */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+    background: #2a3142 !important;
+}
+
+
+/* =============================================================
+   BOT CHAT MESSAGE BACKGROUND
+============================================================= */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+    background: #232634 !important;
+}

@@ -1,0 +1,73 @@
+/* =====================================================
+   CHAT MESSAGE
+===================================================== */
+
+/* CONTAINER */
+[data-testid="stChatMessage"] {
+    padding: 18px !important;
+    border-radius: 18px !important;
+    margin-bottom: 16px !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+/* FORCE ALL TEXT WHITE */
+[data-testid="stChatMessage"] * {
+    color: inherit !important;
+}
+
+/* TARGET BUTTON INTERNAL STREAMLIT */
+.stButton button {
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+
+    line-height: 1 !important;
+}
+
+/* FIX TEXT WRAPPER DALAM BUTTON */
+.stButton button div {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+/* FIX PARAGRAPH (INI YANG SERING BIKIN TIDAK CENTER) */
+.stButton button p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+/* OPTIONAL: bikin tombol delete benar-benar kotak */
+.delete-btn button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    padding: 0 !important;
+}
+
+/* CHAT ROW FLEX BEHAVIOR */
+div[data-testid="column"] {
+    min-width: 0 !important;
+}
+
+/* LEFT COLUMN = GROW (TEXT) */
+div[data-testid="column"]:first-child {
+    flex: 1 1 auto !important;
+}
+
+/* RIGHT COLUMN = SHRINK (DELETE) */
+div[data-testid="column"]:last-child {
+    flex: 0 0 44px !important;
+    max-width: 44px !important;
+    min-width: 44px !important;
+}
+
+/* BUTTON TEXT TRUNCATE SAFELY */
+.stButton button {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}

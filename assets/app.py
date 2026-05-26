@@ -89,28 +89,28 @@ with st.sidebar:
     # NEW CHAT BUTTON
     # =================================================
 
-    st.markdown(
-        '<div class="new-chat-btn">',
-        unsafe_allow_html=True
-    )
+    new_chat_container = st.container()
 
-    if st.button(
-        "➕ Obrolan Baru",
-        use_container_width=True
-    ):
+    with new_chat_container:
 
-        new_chat_id = str(uuid.uuid4())
+        st.markdown('<div class="new-chat-anchor"></div>',
+        unsafe_allow_html=True)
 
-        st.session_state.chats[new_chat_id] = {
-            "title": "New Chat",
-            "messages": []
-        }
+        if st.button(
+            "➕ Obrolan Baru",
+            use_container_width=True
+        ):
 
-        st.session_state.current_chat = new_chat_id
+            new_chat_id = str(uuid.uuid4())
 
-        st.rerun()
+            st.session_state.chats[new_chat_id] = {
+                "title": "New Chat",
+                "messages": []
+            }
 
-    st.markdown("</div>", unsafe_allow_html=True)
+            st.session_state.current_chat = new_chat_id
+
+            st.rerun()
 
     st.divider()
 
@@ -128,44 +128,53 @@ with st.sidebar:
 
         col1, col2 = st.columns([0.85, 0.15], gap="small")
 
-        # =============================================
-        # OPEN CHAT
-        # =============================================
+        chat_container = st.container()
 
-        with col1:
+        with chat_container:
 
-            if st.button(
-                display_title,
-                key=f"chat_{chat_id}",
-                use_container_width=True
-            ):
-                st.session_state.current_chat = chat_id
-                st.rerun()
+            # =============================================
+            # OPEN CHAT
+            # =============================================
+            with col1:
 
-        # =============================================
-        # DELETE CHAT
-        # =============================================
+                st.markdown('<div class="chat-list-anchor"></div>',
+                unsafe_allow_html=True)
 
-        with col2:
+                if st.button(
+                    display_title,
+                    key=f"chat_{chat_id}",
+                    use_container_width=True
+                ):
+                    st.session_state.current_chat = chat_id
+                    st.rerun()
 
-            if st.button(
-                "✕",
-                key=f"delete_{chat_id}",
-                use_container_width=True
-            ):
-                del st.session_state.chats[chat_id]
+            # =============================================
+            # DELETE CHAT
+            # =============================================
 
-                if len(st.session_state.chats) == 0:
-                    new_chat_id = str(uuid.uuid4())
-                    st.session_state.chats[new_chat_id] = {
-                        "title": "New Chat",
-                        "messages": []
-                    }
-                    st.session_state.current_chat = new_chat_id
-                else:
-                    st.session_state.current_chat = list(st.session_state.chats.keys())[0]
+            with col2:
 
-                st.rerun()
+                st.markdown('<div class="delete-chat-anchor"></div>',
+                unsafe_allow_html=True)
+
+                if st.button(
+                    "✕",
+                    key=f"delete_{chat_id}",
+                    use_container_width=True
+                ):
+                    del st.session_state.chats[chat_id]
+
+                    if len(st.session_state.chats) == 0:
+                        new_chat_id = str(uuid.uuid4())
+                        st.session_state.chats[new_chat_id] = {
+                            "title": "New Chat",
+                            "messages": []
+                        }
+                        st.session_state.current_chat = new_chat_id
+                    else:
+                        st.session_state.current_chat = list(st.session_state.chats.keys())[0]
+
+                    st.rerun()
 
 # =====================================================
 # MAIN CHAT AREA
@@ -206,10 +215,8 @@ if len(current_chat["messages"]) == 0:
 
     with inline_menu:
 
-      st.markdown(
-          '<div class="inline-menu-anchor"></div>',
-          unsafe_allow_html=True
-      )
+      st.markdown('<div class="inline-menu-anchor"></div>',
+      unsafe_allow_html=True)
 
       col1, col2, col3, col4 = st.columns(4)
 

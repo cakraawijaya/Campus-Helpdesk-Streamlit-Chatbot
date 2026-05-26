@@ -6,8 +6,7 @@ def load_all_css():
     css_files = [
         "base.css",
         "light_mode.css",
-        "dark_mode.css",
-        "chat.css"
+        "dark_mode.css"
     ]
 
     all_css = ""

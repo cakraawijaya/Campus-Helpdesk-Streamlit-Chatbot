@@ -1,27 +1,14 @@
-/* =====================================================
-   GLOBAL
-===================================================== */
+/* =====================================================================================
+   REMOVE THE STREAMLIT ICON LINK
+===================================================================================== */
 
-.stApp {
-    transition: all 0.25s ease;
-}
-
-
-/* =========================================
-   HILANGKAN LINK ICON STREAMLIT
-========================================= */
-
-/* SEMUA LINK MARKDOWN */
+/* Remove markdown links */
 [data-testid="stMarkdown"] a {
     text-decoration: none !important;
 }
 
-/* HIDE ICON SVG YANG SERING MUNCUL DI LINK */
-[data-testid="stMarkdown"] a svg {
-    display: none !important;
-}
-
-/* KADANG ICON NEMPEL SEBAGAI PSEUDO ELEMENT */
+/* Hide the SVG icon on the link */
+[data-testid="stMarkdown"] a svg,
 [data-testid="stMarkdown"] a::after,
 [data-testid="stMarkdown"] a::before {
     display: none !important;
@@ -29,147 +16,228 @@
 }
 
 
-/* =====================================================
+/* =====================================================================================
    SIDEBAR
-===================================================== */
+===================================================================================== */
 
+/* Main sidebar container */
 section[data-testid="stSidebar"] {
     width: 320px !important;
-}
-[data-testid="stSidebarCollapseButton"] {
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: flex !important;
-    transform: none !important;
-    pointer-events: auto !important;
-    margin-left: 6px !important;
-}
-[data-testid="stSidebarCollapseButton"]:hover {
-    opacity: 1 !important;
-}
-[data-testid="stExpandSidebarButton"] {
-    position: relative !important;
-    left: 10px;
-    padding: 6px 0px 6px 8px;
-    border-radius: 8px !important;
-}
-@media only screen and (max-width: 768px) {
-    [data-testid="stExpandSidebarButton"] {
-        left: 15px;
-        position: relative !important;
-        padding: 6px 0px 6px 8px;
-        border-radius: 6px !important;
-    }
-}
-section[data-testid="stSidebar"] {
     background-color: #0f172a !important;
     opacity: 1 !important;
     visibility: visible !important;
     transition: none !important;
     will-change: transform;
 }
+
+/* Inner sidebar wrapper */
 section[data-testid="stSidebar"] > div {
     background-color: inherit !important;
     opacity: 1 !important;
     transition: opacity 0.12s ease-in-out !important;
 }
-section[data-testid="stSidebar"] * {
+
+/* Remove default Streamlit background layers */
+section[data-testid="stSidebar"]
+[data-testid="stSidebarNav"],
+section[data-testid="stSidebar"]
+[data-testid="stVerticalBlock"] {
     background-color: transparent !important;
 }
-section[data-testid="stSidebar"] [data-testid="stSidebarNav"],
-section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
-    background-color: transparent !important;
-}
+
+/* Apply sidebar entrance animation */
 section[data-testid="stSidebar"] * {
     animation: sidebarIn 0.16s ease-out;
 }
+
+/* Sidebar animation keyframes */
 @keyframes sidebarIn {
     from {
         opacity: 0.6;
         transform: translateX(-6px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
     }
 }
-[data-testid="stHeader"] {
-    transition: transform 0.25s ease-in-out !important;
+
+
+/* =====================================================================================
+   SIDEBAR BUTTONS
+===================================================================================== */
+
+/* Sidebar collapse button */
+[data-testid="stSidebarCollapseButton"] {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    margin-left: 6px !important;
 }
+
+/* Collapse button hover state */
+[data-testid="stSidebarCollapseButton"]:hover {
+    opacity: 1 !important;
+}
+
+/* Sidebar expand button */
+[data-testid="stExpandSidebarButton"] {
+    position: relative !important;
+    left: 10px;
+    padding: 6px 0 6px 8px;
+    border-radius: 8px !important;
+}
+
+/* Responsive adjustment for mobile devices */
+@media only screen and (max-width: 768px) {
+    [data-testid="stExpandSidebarButton"] {
+        left: 15px;
+        padding: 6px 0 6px 8px;
+        border-radius: 6px !important;
+    }
+}
+
+
+/* =====================================================================================
+   MAIN BACKGROUND
+===================================================================================== */
+
 [data-testid="stAppViewContainer"] {
     background-color: #0f172a !important;
 }
 
 
-/* =====================================================
+/* =====================================================================================
    TOOLBAR
-===================================================== */
+===================================================================================== */
 
 [data-testid="stToolbar"] {
     right: 1rem;
 }
 
 
-/* =====================================================
+/* =====================================================================================
    BUTTONS
-===================================================== */
+===================================================================================== */
 
-/* GENERAL BUTTON */
+/* Main button structure */
 .stButton button {
-    width: 100%;
+    width: 100% !important;
+    height: 38px !important;
+    padding: 0 !important;
+    border-radius: 14px !important;
+    border: 1px solid #334155 !important;
     color: inherit !important;
-    border-radius: 14px;
-    padding: 12px 14px;
-    border: 1px solid #334155;
+    line-height: 1 !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
     transition: all 0.2s ease;
 }
 
-/* GENERAL BUTTON HOVER */
+/* Button hover effect */
 .stButton button:hover {
     color: inherit !important;
-    background-color: #2563eb;
-    border-color: #2563eb;
+    background-color: #2563eb !important;
     transform: translateY(-1px);
 }
 
-/* NEW CHAT BUTTON */
-.new-chat-btn .stButton button {
-    background-color: #d0d6df !important;
-    border: 1px solid #3b82f6 !important;
-    box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+/* Button content wrapper */
+.stButton > button > div {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    padding-left: 12px !important;
 }
 
-/* DEFAULT BUTTON = LEFT */
-.stButton > button {
-    width: 100% !important;
-    gap: 8px;
+/* Reset paragraph spacing inside buttons */
+.stButton button p {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
 }
-.stButton > button > div {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-}
-.stButton > button div.stMarkdownContainer {
+
+/* Markdown container inside buttons */
+.stButton div.stMarkdownContainer {
     width: 100% !important;
     text-align: left !important;
     font-size: 15px !important;
 }
-.stButton button p {
+
+
+/* =====================================================================================
+   NEW CHAT BUTTON
+===================================================================================== */
+
+/* Increase button height and vertical padding */
+[data-testid="stVerticalBlock"]:has(.new-chat-anchor)
+> div:nth-of-type(2) button {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    min-height: 60px !important;
+}
+
+/* Make new chat text semi-bold */
+[data-testid="stVerticalBlock"]:has(.new-chat-anchor)
+> div:nth-of-type(2) button p {
     font-weight: 600 !important;
 }
 
-/* INLINE MENU BUTTON = CENTER FOR TABLET++ */
+
+/* =====================================================================================
+   CHAT LIST
+===================================================================================== */
+
+[data-testid="stVerticalBlock"]:has(.chat-list-anchor)
+.stButton button p {
+    font-weight: 400 !important;
+}
+
+
+/* =====================================================================================
+   DELETE BUTTON
+===================================================================================== */
+
+/* Make delete icon or text bold */
+.delete-chat-anchor + div .stButton button p {
+    font-weight: 700 !important;
+}
+
+/* Center delete button content */
+.delete-chat-anchor + div .stButton > button > div {
+    justify-content: center !important;
+    padding-left: 0 !important;
+}
+
+/* Center align delete button text */
+.delete-chat-anchor + div .stButton div.stMarkdownContainer {
+    text-align: center !important;
+}
+
+
+/* =====================================================================================
+   INLINE MENU BUTTON
+===================================================================================== */
+
+/* Center inline button content */
 [data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
 .stButton > button > div {
     justify-content: center !important;
+    padding-left: 0 !important;
 }
+
+/* Center align inline menu text */
 [data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
 .stButton div.stMarkdownContainer p {
     text-align: center !important;
     margin: 0 auto !important;
 }
 
-/* INLINE MENU BUTTON = LEFT FOR MOBILE */
+/* Mobile layout adjustment for inline menu buttons */
 @media (max-width: 768px) {
     [data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
     .stButton > button > div {
@@ -178,31 +246,55 @@ section[data-testid="stSidebar"] * {
     }
 }
 
-
-/* =============================================================
-   CHAT INPUT FOCUS STYLING
-============================================================= */
-/* Apply rounded corners to chat input container */
-[data-testid="stChatInput"] {
-    border-radius: 14px !important;
+/* Use semi-bold font for inline menu buttons */
+[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
+button p {
+    font-weight: 600 !important;
 }
 
-/* Ensure inner chat input elements have consistent rounding */
+
+/* =====================================================================================
+   CHAT MESSAGE
+===================================================================================== */
+
+/* Main chat message container */
+[data-testid="stChatMessage"] {
+    padding: 18px !important;
+    border-radius: 18px !important;
+    margin-bottom: 16px !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+/* Force all text to inherit parent color */
+[data-testid="stChatMessage"] * {
+    color: inherit !important;
+}
+
+
+/* =====================================================================================
+   CHAT INPUT FIELD
+===================================================================================== */
+
+/* Main chat input wrapper */
+[data-testid="stChatInput"] {
+    border-radius: 14px !important;
+    overflow: hidden !important;
+}
+
+/* Inner textarea or contenteditable styling */
 [data-testid="stChatInput"] > div,
 [data-testid="stChatInput"] div[contenteditable="true"],
 [data-testid="stChatInput"] textarea {
     border-radius: 14px !important;
 }
 
-/* Prevent overflow clipping in chat input container */
-[data-testid="stChatInput"] {
-    overflow: hidden !important;
-}
 
-
-/* =============================================================
+/* =====================================================================================
    CHAT SUBMIT BUTTON
-============================================================= */
+===================================================================================== */
+
+/* Default submit button state */
 [data-testid="stChatInputSubmitButton"] {
     background: #354359 !important;
     color: white !important;
@@ -210,14 +302,11 @@ section[data-testid="stSidebar"] * {
     transition: all 0.2s ease;
 }
 
-
-/* =============================================================
-   ACTIVE STATE: INPUT FOCUS ENABLES SUBMIT BUTTON
-============================================================= */
+/* Active state when chat input is focused */
 [data-testid="stChatInput"]:focus-within
 [data-testid="stChatInputSubmitButton"] {
     background: #222d40 !important;
-    opacity: 1 !important;
     color: white !important;
-    box-shadow: 0 0 0 2px rgba(37,99,235,0.3);
+    opacity: 1 !important;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
 }

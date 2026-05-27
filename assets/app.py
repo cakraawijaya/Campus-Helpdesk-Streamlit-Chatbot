@@ -77,6 +77,30 @@ st.markdown(f"""
 
 
 # =====================================================================================
+# DEVICE DETECTION
+# =====================================================================================
+
+# Detect whether the current device is mobile
+user_agent = st.context.headers.get("User-Agent", "").lower()
+
+# Check common mobile device keywords
+is_mobile = any(
+    keyword in user_agent
+    for keyword in [
+        "iphone",
+        "android",
+        "mobile",
+        "ipad",
+        "tablet"
+    ]
+)
+
+# Store the device type inside session_state
+st.session_state.is_mobile = is_mobile
+
+
+
+# =====================================================================================
 # SIDEBAR
 # =====================================================================================
 
@@ -159,8 +183,21 @@ with st.sidebar:
         # Retrieve the chat title
         title = chat_data["title"]
 
-        # Limit title length to keep the sidebar layout clean
-        display_title = title if len(title) <= 19 else title[:19] + "..."
+        # Detect whether the device is mobile
+        is_mobile = st.session_state.get("is_mobile", False)
+
+        # Desktop / tablet:
+        # shorten long chat titles
+        if not is_mobile:
+            display_title = (
+                title if len(title) <= 19
+                else title[:19] + "..."
+            )
+
+        # Mobile:
+        # display the full title
+        else:
+            display_title = title
 
         # Create two columns:
         # left column for opening chats,
@@ -181,8 +218,30 @@ with st.sidebar:
                 st.markdown('<div class="chat-list-anchor"></div>',
                 unsafe_allow_html=True)
 
+                # Ambil prompt user pertama sebagai tooltip
+                first_user_prompt = ""
+
+                # Retrieve the first user message
+                # to use as the chat preview / tooltip
+                for msg in chat_data["messages"]:
+
+                    # Check whether the message
+                    # was sent by the user
+                    if msg["role"] == "user":
+
+                        # Store the first user prompt
+                        first_user_prompt = msg["content"]
+
+                        # Stop looping after
+                        # finding the first user message
+                        break
+
+                # Enable tooltip only for desktop/tablet
+                tooltip_text = first_user_prompt if not is_mobile else None
+
                 # Button to open a selected chat
-                if st.button(display_title, key=f"chat_{chat_id}", use_container_width=True):
+                if st.button(display_title, key=f"chat_{chat_id}",
+                use_container_width=True, help=tooltip_text):
 
                     # Set the selected chat as the active chat
                     st.session_state.current_chat = chat_id

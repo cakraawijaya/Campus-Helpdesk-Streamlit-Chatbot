@@ -3,7 +3,7 @@
 ===================================================================================== */
 section[data-testid="stSidebar"] {
     background: #dcdfe6 !important;
-    border-right: 1px solid #cbd5e1;
+    border-right: 1px solid #d7dee8;
 }
 
 
@@ -11,8 +11,8 @@ section[data-testid="stSidebar"] {
    NAVBAR
 ===================================================================================== */
 header[data-testid="stHeader"] {
-    background: #d0d6df !important;
-    border-bottom: 1px solid #cbd5e1;
+    background: #ced0d4 !important;
+    border-bottom: 1px solid #d7dee8;
 }
 
 
@@ -20,7 +20,7 @@ header[data-testid="stHeader"] {
    MAIN BACKGROUND
 ===================================================================================== */
 [data-testid="stAppViewContainer"] {
-    background: #f8fafc !important;
+    background: #ffffff !important;
 }
 
 
@@ -28,8 +28,8 @@ header[data-testid="stHeader"] {
    FOOTER
 ===================================================================================== */
 [data-testid="stBottomBlockContainer"] {
-    background: #c6cdd8 !important;
-    border-top: 1px solid #cbd5e1;
+    background: #b9bbbe !important;
+    border-bottom: 1px solid #d7dee8;
 }
 
 
@@ -38,14 +38,26 @@ header[data-testid="stHeader"] {
 ===================================================================================== */
 /* Default button appearance */
 .stButton button {
-    background: #b8c1cc !important;
+    background: #f0f4ff !important;
     border: 1px solid #cbd5e1;
 }
 
 /* Default button hover state styling */
 .stButton button:hover {
-    background: #a8b3bf !important;
+    background: #c7d0db !important;
     border: 1px solid #cbd5e1;
+}
+
+/* New-Chat button appearance */
+[data-testid="stVerticalBlock"]:has(.new-chat-anchor)
+> div:nth-of-type(2) button {
+    background-color: #a8b3bf !important;
+}
+
+/* New-Chat button hover state styling */
+[data-testid="stVerticalBlock"]:has(.new-chat-anchor)
+> div:nth-of-type(2) button:hover {
+    background-color: #a8b3bf !important;
 }
 
 
@@ -61,7 +73,7 @@ header[data-testid="stHeader"] {
    USER CHAT MESSAGE BACKGROUND
 ===================================================================================== */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
-    background: #dcdfe6 !important;
+    background: #a8b3bf !important;
 }
 
 

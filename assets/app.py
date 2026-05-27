@@ -293,7 +293,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Store the quick prompt inside session_state
                 st.session_state["quick_prompt"] = (
-                    "Rekomendasikan universitas terbaik di Indonesia"
+                    "Rekomendasikan universitas yang ada di Indonesia berdasarkan peringkat terbaik."
                 )
 
             # Button for location-based campus recommendations
@@ -301,7 +301,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the location quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Rekomendasi kampus berdasarkan lokasi"
+                    "Rekomendasikan universitas yang ada di Indonesia berdasarkan lokasi."
                 )
 
         # Second quick menu column
@@ -312,7 +312,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the curriculum quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Informasi kurikulum dan mata kuliah"
+                    "Rekomendasikan universitas yang ada di Indonesia berdasarkan mata kuliah dan kurikulum terbaik."
                 )
 
             # Button for tuition fee information
@@ -320,7 +320,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the tuition fee quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Informasi UKT kampus"
+                    "Rekomendasikan universitas yang ada di Indonesia berdasarkan UKT terendah hingga tertinggi."
                 )
 
         # Third quick menu column
@@ -331,7 +331,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the facilities quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Kampus dengan fasilitas terbaik"
+                    "Rekomendasikan universitas yang ada di Indonesia berdasarkan fasilitas terbaik."
                 )
 
             # Button for accreditation information
@@ -339,7 +339,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the accreditation quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Informasi akreditasi kampus"
+                    "Rekomendasikan universitas yang ada di Indonesia berdasarkan akreditasi terbaik di wilayah masing-masing."
                 )
 
         # Fourth quick menu column
@@ -350,7 +350,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the career quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Prospek kerja tiap jurusan"
+                    "Berikan informasi terkait prospek kerja di tiap jurusan dan kasih saran terkait relevansi dunia kerja saat ini."
                 )
 
             # Button for scholarship information
@@ -358,7 +358,7 @@ if len(current_chat["messages"]) == 0:
 
                 # Save the scholarship quick prompt
                 st.session_state["quick_prompt"] = (
-                    "Cari informasi beasiswa"
+                    "Berikan informasi terkait beasiswa yang sedang berlangsung dan akan datang."
                 )
 
         # Display additional instructions below the quick menu
@@ -443,6 +443,9 @@ if prompt:
 
         # Create a placeholder for the typing animation effect
         response_placeholder = st.empty()
+
+        # Loading text
+        response_placeholder.markdown("AI sedang berpikir...")
         full_response = ""
 
         # Start the Gemini API request process
@@ -450,12 +453,21 @@ if prompt:
 
             # Send the user prompt to the Gemini model
             response = client.models.generate_content(
-                model="gemini-2.0-flash-lite",
+                model="gemini-2.5-flash",
                 contents=prompt
             )
 
             # Retrieve the generated text response from Gemini
-            bot_reply = response.text
+            if response.text:
+                bot_reply = response.text
+            
+            # If the response is empty
+            else:
+                bot_reply = """
+                Maaf, saya tidak dapat menghasilkan jawaban untuk pertanyaan tersebut.
+
+                Silakan coba pertanyaan lain.
+                """
 
         # Handle errors that occur during the API request
         except Exception as e:

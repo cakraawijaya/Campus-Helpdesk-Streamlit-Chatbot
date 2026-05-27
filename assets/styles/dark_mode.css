@@ -1,7 +1,7 @@
 /* =====================================================================================
    SIDEBAR
 ===================================================================================== */
-html[data-theme="dark"] section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {
     background: #101828 !important;
     border-right: 1px solid #374151;
 }
@@ -10,7 +10,7 @@ html[data-theme="dark"] section[data-testid="stSidebar"] {
 /* =====================================================================================
    NAVBAR
 ===================================================================================== */
-html[data-theme="dark"] header[data-testid="stHeader"] {
+header[data-testid="stHeader"] {
     background: #141420 !important;
     border-bottom: 1px solid #374151;
 }
@@ -19,7 +19,7 @@ html[data-theme="dark"] header[data-testid="stHeader"] {
 /* =====================================================================================
    MAIN BACKGROUND
 ===================================================================================== */
-html[data-theme="dark"] [data-testid="stAppViewContainer"] {
+[data-testid="stAppViewContainer"] {
     background: #1b1b29 !important;
 }
 
@@ -27,7 +27,7 @@ html[data-theme="dark"] [data-testid="stAppViewContainer"] {
 /* =====================================================================================
    FOOTER
 ===================================================================================== */
-html[data-theme="dark"] [data-testid="stBottomBlockContainer"] {
+[data-testid="stBottomBlockContainer"] {
     background: #141420 !important;
     border-top: 1px solid #374151;
 }
@@ -37,25 +37,25 @@ html[data-theme="dark"] [data-testid="stBottomBlockContainer"] {
    BUTTON STYLE
 ===================================================================================== */
 /* Default button appearance */
-html[data-theme="dark"] .stButton button {
+.stButton button {
     background: #2f3849 !important;
     border: 1px solid #374151;
 }
 
 /* Default button hover state styling */
-html[data-theme="dark"] .stButton button:hover {
+.stButton button:hover {
     background: #3a465c !important;
     border: 1px solid #374151;
 }
 
 /* New-Chat button appearance */
-html[data-theme="dark"] [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
+[data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button {
     background-color: #136788 !important;
 }
 
 /* New-Chat button hover state styling */
-html[data-theme="dark"] [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
+[data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button:hover {
     background-color: #157297 !important;
 }
@@ -64,7 +64,7 @@ html[data-theme="dark"] [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 /* =====================================================================================
    HIGHLIGHT CHAT INPUT WHEN FOCUSED
 ===================================================================================== */
-html[data-theme="dark"] [data-testid="stChatInput"]:focus-within {
+[data-testid="stChatInput"]:focus-within {
     box-shadow: 0 0 0 2px #136788 !important;
 }
 
@@ -72,7 +72,7 @@ html[data-theme="dark"] [data-testid="stChatInput"]:focus-within {
 /* =====================================================================================
    USER CHAT MESSAGE BACKGROUND
 ===================================================================================== */
-html[data-theme="dark"] [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
     background: #136788 !important;
 }
 
@@ -80,6 +80,6 @@ html[data-theme="dark"] [data-testid="stChatMessage"]:has([data-testid="stChatMe
 /* =====================================================================================
    BOT CHAT MESSAGE BACKGROUND
 ===================================================================================== */
-html[data-theme="dark"] [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
     background: #232634 !important;
 }

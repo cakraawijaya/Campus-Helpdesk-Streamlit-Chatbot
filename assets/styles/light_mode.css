@@ -1,7 +1,7 @@
 /* =====================================================================================
    SIDEBAR
 ===================================================================================== */
-html[data-theme="light"] section[data-testid="stSidebar"] {
+section[data-testid="stSidebar"] {
     background: #dcdfe6 !important;
     border-right: 1px solid #cbd5e1;
 }
@@ -10,7 +10,7 @@ html[data-theme="light"] section[data-testid="stSidebar"] {
 /* =====================================================================================
    NAVBAR
 ===================================================================================== */
-html[data-theme="light"] header[data-testid="stHeader"] {
+header[data-testid="stHeader"] {
     background: #d0d6df !important;
     border-bottom: 1px solid #cbd5e1;
 }
@@ -19,7 +19,7 @@ html[data-theme="light"] header[data-testid="stHeader"] {
 /* =====================================================================================
    MAIN BACKGROUND
 ===================================================================================== */
-html[data-theme="light"] [data-testid="stAppViewContainer"] {
+[data-testid="stAppViewContainer"] {
     background: #f8fafc !important;
 }
 
@@ -27,7 +27,7 @@ html[data-theme="light"] [data-testid="stAppViewContainer"] {
 /* =====================================================================================
    FOOTER
 ===================================================================================== */
-html[data-theme="light"] [data-testid="stBottomBlockContainer"] {
+[data-testid="stBottomBlockContainer"] {
     background: #c6cdd8 !important;
     border-top: 1px solid #cbd5e1;
 }
@@ -37,13 +37,13 @@ html[data-theme="light"] [data-testid="stBottomBlockContainer"] {
    BUTTON STYLE
 ===================================================================================== */
 /* Default button appearance */
-html[data-theme="light"] .stButton button {
+.stButton button {
     background: #b8c1cc !important;
     border: 1px solid #cbd5e1;
 }
 
 /* Default button hover state styling */
-html[data-theme="light"] .stButton button:hover {
+.stButton button:hover {
     background: #a8b3bf !important;
     border: 1px solid #cbd5e1;
 }
@@ -52,7 +52,7 @@ html[data-theme="light"] .stButton button:hover {
 /* =====================================================================================
    HIGHLIGHT CHAT INPUT WHEN FOCUSED
 ===================================================================================== */
-html[data-theme="light"] [data-testid="stChatInput"]:focus-within {
+[data-testid="stChatInput"]:focus-within {
     box-shadow: 0 0 0 2px #222d40 !important;
 }
 
@@ -60,7 +60,7 @@ html[data-theme="light"] [data-testid="stChatInput"]:focus-within {
 /* =====================================================================================
    USER CHAT MESSAGE BACKGROUND
 ===================================================================================== */
-html[data-theme="light"] [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
     background: #dcdfe6 !important;
 }
 
@@ -68,6 +68,6 @@ html[data-theme="light"] [data-testid="stChatMessage"]:has([data-testid="stChatM
 /* =====================================================================================
    BOT CHAT MESSAGE BACKGROUND
 ===================================================================================== */
-html[data-theme="light"] [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
     background: #f5f7fa !important;
 }

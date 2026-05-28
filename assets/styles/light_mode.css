@@ -20,7 +20,7 @@ header[data-testid="stHeader"] {
    MAIN BACKGROUND
 ===================================================================================== */
 [data-testid="stAppViewContainer"] {
-    background: #ffffff !important;
+    background: #eef2f5 !important;
 }
 
 
@@ -57,7 +57,7 @@ header[data-testid="stHeader"] {
 /* New-Chat button hover state styling */
 [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button:hover {
-    background-color: #a8b3bf !important;
+    background-color: #96a4b2 !important;
 }
 
 

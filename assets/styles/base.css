@@ -91,13 +91,9 @@ section[data-testid="stSidebar"] * {
     border-radius: 8px !important;
 }
 
-/* Responsive adjustment for mobile devices */
-@media only screen and (max-width: 768px) {
-    [data-testid="stExpandSidebarButton"] {
-        left: 15px;
-        padding: 6px 0 6px 8px;
-        border-radius: 6px !important;
-    }
+
+[data-testid="stMainBlockContainer"] {
+    margin-bottom: 30px !important;
 }
 
 
@@ -196,13 +192,29 @@ section[data-testid="stSidebar"] * {
    CHAT LIST
 ===================================================================================== */
 
-/* Font Normal */
 [data-testid="stVerticalBlock"]:has(.chat-list-anchor)
-.stButton button p {
-    font-weight: 400 !important;
+.stButton button {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    text-align: left !important;
 }
 
-/* Force tooltip position */
+[data-testid="stVerticalBlock"]:has(.chat-list-anchor)
+.stButton button * {
+    text-align: left !important;
+}
+
+[data-testid="stVerticalBlock"]:has(.chat-list-anchor)
+.stButton button > div {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+}
+
+/* Tooltip */
 div[data-baseweb="tooltip"][style] {
     left: 28px !important;
 }
@@ -213,27 +225,6 @@ div[data-baseweb="tooltip"] > div {
     border-radius: 12px !important;
     white-space: normal !important;
     overflow-wrap: break-word !important;
-}
-
-
-/* =====================================================================================
-   DELETE BUTTON
-===================================================================================== */
-
-/* Make delete icon or text bold */
-.delete-chat-anchor + div .stButton button p {
-    font-weight: 700 !important;
-}
-
-/* Center delete button content */
-.delete-chat-anchor + div .stButton > button > div {
-    justify-content: center !important;
-    padding-left: 0 !important;
-}
-
-/* Center align delete button text */
-.delete-chat-anchor + div .stButton div.stMarkdownContainer {
-    text-align: center !important;
 }
 
 
@@ -253,15 +244,6 @@ div[data-baseweb="tooltip"] > div {
 .stButton div.stMarkdownContainer p {
     text-align: center !important;
     margin: 0 auto !important;
-}
-
-/* Mobile layout adjustment for inline menu buttons */
-@media (max-width: 768px) {
-    [data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
-    .stButton > button > div {
-        justify-content: flex-start !important;
-        padding-left: 25px !important;
-    }
 }
 
 /* Use semi-bold font for inline menu buttons */
@@ -343,4 +325,53 @@ button p {
     background: #141420;
     border-top: 1px solid #374151;
     padding: 10px 16px;
+}
+
+
+/* =====================================================================================
+   CLOSE CHAT BUTTON
+===================================================================================== */
+
+/* Main button */
+.close-chat-anchor + div .stButton button {
+    min-height: 42px !important;
+    border-radius: 12px !important;
+    border: 1px solid #475569 !important;
+    background: #1e293b !important;
+    transition: all 0.18s ease !important;
+}
+
+/* Hover effect */
+.close-chat-anchor + div .stButton button:hover {
+    background: #dc2626 !important;
+    border-color: #ef4444 !important;
+    transform: translateY(-1px);
+}
+
+/* Center content horizontally + vertically */
+.close-chat-anchor + div .stButton > button > div {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-left: 0 !important;
+    height: 100% !important;
+}
+
+/* Text styling */
+.close-chat-anchor + div .stButton button p {
+    margin: 0 !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    line-height: 1 !important;
+}
+
+
+/* =====================================================================================
+   CLOSE CHAT BUTTON
+===================================================================================== */
+
+.delete-chat-anchor + div[data-testid="stButton"] {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4rem;
 }

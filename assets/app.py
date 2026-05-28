@@ -39,7 +39,8 @@ if "chats" not in st.session_state:
     st.session_state.chats = {
         first_chat_id: {
             "title": "New Chat",
-            "messages": []
+            "messages": [],
+            "created_at": time.time()
         }
     }
 
@@ -73,30 +74,6 @@ st.markdown(f"""
 {load_all_css()}
 </style>
 """, unsafe_allow_html=True)
-
-
-
-# =====================================================================================
-# DEVICE DETECTION
-# =====================================================================================
-
-# Detect whether the current device is mobile
-user_agent = st.context.headers.get("User-Agent", "").lower()
-
-# Check common mobile device keywords
-is_mobile = any(
-    keyword in user_agent
-    for keyword in [
-        "iphone",
-        "android",
-        "mobile",
-        "ipad",
-        "tablet"
-    ]
-)
-
-# Store the device type inside session_state
-st.session_state.is_mobile = is_mobile
 
 
 
@@ -157,7 +134,8 @@ with st.sidebar:
             # Add the new chat into session_state
             st.session_state.chats[new_chat_id] = {
                 "title": "New Chat",
-                "messages": []
+                "messages": [],
+                "created_at": time.time()
             }
 
             # Set the newly created chat as the active chat
@@ -169,124 +147,60 @@ with st.sidebar:
     # Display another divider line in the sidebar
     st.divider()
 
-
     # CHAT HISTORY
     # Loop through all saved chats in session_state
-    for chat_id, chat_data in list(st.session_state.chats.items()):
+    sorted_chats = sorted(
+        st.session_state.chats.items(),
+        key=lambda x: x[1].get("created_at", 0),
+        reverse=True
+    )
 
-        # Check whether the chat has no messages
+    for chat_id, chat_data in sorted_chats:
+
+        # Hide empty chats
         if len(chat_data["messages"]) == 0:
-
-            # Skip empty chats so they are not displayed
             continue
 
-        # Retrieve the chat title
+        # Retrieve chat title
         title = chat_data["title"]
 
-        # Detect whether the device is mobile
-        is_mobile = st.session_state.get("is_mobile", False)
+        # Always shorten title
+        display_title = (
+            title if len(title) <= 29
+            else title[:29] + "..."
+        )
 
-        # Desktop / tablet:
-        # shorten long chat titles
-        if not is_mobile:
-            display_title = (
-                title if len(title) <= 19
-                else title[:19] + "..."
-            )
+        # First user prompt for tooltip
+        first_user_prompt = ""
 
-        # Mobile:
-        # display the full title
-        else:
-            display_title = title
+        for msg in chat_data["messages"]:
 
-        # Create two columns:
-        # left column for opening chats,
-        # right column for deleting chats
-        col1, col2 = st.columns([0.85, 0.15], gap="small")
+            if msg["role"] == "user":
+                first_user_prompt = msg["content"]
+                break
 
-        # Create a container for each chat item
+        # Chat item container
         chat_container = st.container()
 
-        # Add components inside the chat container
         with chat_container:
 
-            # OPEN CHAT
-            # Left column area for opening chats
-            with col1:
+            # HTML anchor for custom styling
+            st.markdown('<div class="chat-list-anchor"></div>',
+            unsafe_allow_html=True)
 
-                # HTML anchor used for custom chat list styling
-                st.markdown('<div class="chat-list-anchor"></div>',
-                unsafe_allow_html=True)
+            # Open chat button
+            if st.button(
+                display_title,
+                key=f"chat_{chat_id}",
+                use_container_width=True,
+                help=first_user_prompt
+            ):
 
-                # Ambil prompt user pertama sebagai tooltip
-                first_user_prompt = ""
+                # Set active chat
+                st.session_state.current_chat = chat_id
 
-                # Retrieve the first user message
-                # to use as the chat preview / tooltip
-                for msg in chat_data["messages"]:
-
-                    # Check whether the message
-                    # was sent by the user
-                    if msg["role"] == "user":
-
-                        # Store the first user prompt
-                        first_user_prompt = msg["content"]
-
-                        # Stop looping after
-                        # finding the first user message
-                        break
-
-                # Enable tooltip only for desktop/tablet
-                tooltip_text = first_user_prompt if not is_mobile else None
-
-                # Button to open a selected chat
-                if st.button(display_title, key=f"chat_{chat_id}",
-                use_container_width=True, help=tooltip_text):
-
-                    # Set the selected chat as the active chat
-                    st.session_state.current_chat = chat_id
-
-                    # Refresh the app to display the selected chat
-                    st.rerun()
-
-
-            # DELETE CHAT
-            # Right column area for deleting chats
-            with col2:
-
-                # HTML anchor used for delete button styling
-                st.markdown('<div class="delete-chat-anchor"></div>',
-                unsafe_allow_html=True)
-
-                # Button to delete a chat
-                if st.button("✕", key=f"delete_{chat_id}", use_container_width=True):
-
-                    # Remove the selected chat from session_state
-                    del st.session_state.chats[chat_id]
-
-                    # Check whether all chats have been deleted
-                    if len(st.session_state.chats) == 0:
-
-                        # Generate a new ID for the replacement empty chat
-                        new_chat_id = str(uuid.uuid4())
-
-                        # Create a new empty chat automatically
-                        st.session_state.chats[new_chat_id] = {
-                            "title": "New Chat",
-                            "messages": []
-                        }
-
-                        # Set the new empty chat as the active chat
-                        st.session_state.current_chat = new_chat_id
-                    
-                    # If there are still remaining chats
-                    else:
-
-                        # Set the first remaining chat as the active chat
-                        st.session_state.current_chat = list(st.session_state.chats.keys())[0]
-
-                    # Refresh the app after deleting a chat
-                    st.rerun()
+                # Refresh app
+                st.rerun()
 
 
 
@@ -298,6 +212,38 @@ with st.sidebar:
 current_chat = st.session_state.chats[
     st.session_state.current_chat
 ]
+
+# =====================================================================================
+# TOP ACTION BAR
+# =====================================================================================
+
+# Show delete button only if chat has messages
+if len(current_chat["messages"]) > 0:
+        
+    # Close chat container
+    close_chat_container = st.container()
+
+    with close_chat_container:
+
+            # HTML anchor for custom styling
+            st.markdown('<div class="delete-chat-anchor"></div>', unsafe_allow_html=True)
+
+            clicked = st.button("Tutup Obrolan", key="delete_current_chat")
+
+            if clicked:
+                del st.session_state.chats[st.session_state.current_chat]
+
+                if len(st.session_state.chats) == 0:
+                    new_chat_id = str(uuid.uuid4())
+                    st.session_state.chats[new_chat_id] = {
+                        "title": "New Chat",
+                        "messages": []
+                    }
+                    st.session_state.current_chat = new_chat_id
+                else:
+                    st.session_state.current_chat = list(st.session_state.chats.keys())[0]
+
+                st.rerun()
 
 
 
@@ -421,9 +367,7 @@ if len(current_chat["messages"]) == 0:
                 )
 
         # Display additional instructions below the quick menu
-        st.markdown("""<br>
-        Atau ketik pertanyaan pada kolom chat.
-        <br><br><br>""", unsafe_allow_html=True)
+        st.markdown("""<br>Atau ketik pertanyaan pada kolom chat.<br><br>""", unsafe_allow_html=True)
 
 
 

@@ -60,6 +60,18 @@ header[data-testid="stHeader"] {
     background-color: #96a4b2 !important;
 }
 
+/* Comment here */
+[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
+.stButton button {
+    background-color: #31333f !important;
+}
+
+/* Comment here */
+[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
+.stButton button p {
+    color: white;
+}
+
 
 /* =====================================================================================
    HIGHLIGHT CHAT INPUT WHEN FOCUSED

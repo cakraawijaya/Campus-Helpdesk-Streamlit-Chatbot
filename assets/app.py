@@ -209,16 +209,19 @@ with st.sidebar:
 # =====================================================================================
 
 # Retrieve the currently active chat data
-current_chat = st.session_state.chats[
+current_chat = st.session_state.chats.get(
     st.session_state.current_chat
-]
+)
+
+messages = current_chat["messages"] if current_chat else []
+
 
 # =====================================================================================
 # TOP ACTION BAR
 # =====================================================================================
 
 # Show delete button only if chat has messages
-if len(current_chat["messages"]) > 0:
+if current_chat and len(current_chat["messages"]) > 0:
         
     # Close chat container
     close_chat_container = st.container()
@@ -231,17 +234,20 @@ if len(current_chat["messages"]) > 0:
             clicked = st.button("Tutup Obrolan", key="delete_current_chat")
 
             if clicked:
-                del st.session_state.chats[st.session_state.current_chat]
+                
+                deleted_chat = st.session_state.current_chat
+                del st.session_state.chats[deleted_chat]
 
-                if len(st.session_state.chats) == 0:
+                if len(st.session_state.chats) > 0:
+                    st.session_state.current_chat = None
+                else:
                     new_chat_id = str(uuid.uuid4())
                     st.session_state.chats[new_chat_id] = {
                         "title": "New Chat",
-                        "messages": []
+                        "messages": [],
+                        "created_at": time.time()
                     }
-                    st.session_state.current_chat = new_chat_id
-                else:
-                    st.session_state.current_chat = list(st.session_state.chats.keys())[0]
+                    st.session_state.current_chat = None
 
                 st.rerun()
 
@@ -252,7 +258,7 @@ if len(current_chat["messages"]) > 0:
 # =====================================================================================
 
 # Check whether the current chat is still empty
-if len(current_chat["messages"]) == 0:
+if len(messages) == 0:
 
     # Display the welcome page title
     st.title("Selamat datang di Campus Helpdesk")
@@ -376,7 +382,7 @@ if len(current_chat["messages"]) == 0:
 # =====================================================================================
 
 # Display all messages from the active chat history
-for message in current_chat["messages"]:
+for message in messages:
 
     # Create a chat bubble based on the message role
     # such as user or assistant
@@ -427,9 +433,14 @@ if user_input:
 # Check whether there is a prompt to process
 if prompt:
 
+    chat_id = st.session_state.current_chat
+
     # SAVE USER MESSAGE
-    # Save the user's message into chat history
-    current_chat["messages"].append({"role": "user", "content": prompt})
+    if chat_id:
+        st.session_state.chats[chat_id]["messages"].append({
+            "role": "user",
+            "content": prompt
+        })
 
 
     # SHOW USER MESSAGE
@@ -531,18 +542,17 @@ if prompt:
         response_placeholder.markdown(full_response)
 
 
-    # SAVE AI RESPONSE
-    # Save the AI response into chat history
-    current_chat["messages"].append({"role": "assistant", "content": full_response})
+    # SAVE ASSISTANT MESSAGE
+    if chat_id:
+        st.session_state.chats[chat_id]["messages"].append({
+            "role": "assistant",
+            "content": full_response
+        })
 
 
     # AUTO TITLE CHAT
-    # Check whether the chat still uses the default title
-    if current_chat["title"] == "New Chat":
-
-        # Automatically set the chat title
-        # using the first user prompt
-        current_chat["title"] = prompt[:30]
+    if chat_id and st.session_state.chats[chat_id]["title"] == "New Chat":
+        st.session_state.chats[chat_id]["title"] = prompt[:30]
 
     # Refresh the app after the chat process is complete
     st.rerun()

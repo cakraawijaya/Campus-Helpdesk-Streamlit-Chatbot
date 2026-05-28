@@ -1,97 +1,119 @@
 /* =====================================================================================
    SIDEBAR
 ===================================================================================== */
+
+/* Customize sidebar background and right border */
 section[data-testid="stSidebar"] {
     background: #101828 !important;
     border-right: 1px solid #374151;
 }
 
 
+
 /* =====================================================================================
    NAVBAR
 ===================================================================================== */
+
+/* Customize top navbar background and bottom border */
 header[data-testid="stHeader"] {
     background: #141420 !important;
     border-bottom: 1px solid #374151;
 }
 
 
+
 /* =====================================================================================
    MAIN BACKGROUND
 ===================================================================================== */
+
+/* Set the main application background color */
 [data-testid="stAppViewContainer"] {
     background: #1b1b29 !important;
 }
 
 
+
 /* =====================================================================================
    FOOTER
 ===================================================================================== */
+
+/* Customize footer background and border */
 [data-testid="stBottomBlockContainer"] {
     background: #141420 !important;
     border-top: 1px solid #374151;
 }
 
 
+
 /* =====================================================================================
    BUTTON STYLE
 ===================================================================================== */
+
 /* Default button appearance */
 .stButton button {
     background: #2f3849 !important;
     border: 1px solid #374151;
 }
 
-/* Default button hover state styling */
+/* Button hover effect */
 .stButton button:hover {
     background: #3a465c !important;
     border: 1px solid #374151;
 }
 
-/* New-Chat button appearance */
+/* "New Chat" button background color */
 [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button {
     background-color: #136788 !important;
 }
 
-/* New-Chat button hover state styling */
+/* "New Chat" button hover effect */
 [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button:hover {
     background-color: #157297 !important;
 }
 
-/* Comment here */
+/* "Delete Chat" button background color */
 [data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
 .stButton button {
     background-color: #fafafa !important;
 }
 
-/* Comment here */
+/* "Delete Chat" button text color */
 [data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
 .stButton button p {
     color: #31333f;
 }
 
 
+
 /* =====================================================================================
    HIGHLIGHT CHAT INPUT WHEN FOCUSED
 ===================================================================================== */
+
+/* Add highlight effect when chat input is focused */
 [data-testid="stChatInput"]:focus-within {
     box-shadow: 0 0 0 2px #136788 !important;
 }
 
 
+
 /* =====================================================================================
    USER CHAT MESSAGE BACKGROUND
 ===================================================================================== */
+
+/* User message bubble background color */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
     background: #136788 !important;
 }
 
 
+
 /* =====================================================================================
    BOT CHAT MESSAGE BACKGROUND
 ===================================================================================== */
+
+/* Assistant message bubble background color */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
     background: #232634 !important;
 }

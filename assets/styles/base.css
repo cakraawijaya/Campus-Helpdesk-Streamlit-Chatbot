@@ -2,13 +2,13 @@
    REMOVE THE STREAMLIT ICON LINK
 ===================================================================================== */
 
-/* Remove markdown links */
+/* Remove underline decoration from Streamlit header and markdown links */
 [data-testid="stHeaderActionElements"] a,
 [data-testid="stMarkdown"] a {
     text-decoration: none !important;
 }
 
-/* Hide the SVG icon on the link */
+/* Hide Streamlit link icons and pseudo-elements */
 [data-testid="stHeaderActionElements"] a svg,
 [data-testid="stHeaderActionElements"] a::after,
 [data-testid="stHeaderActionElements"] a::before,
@@ -20,11 +20,12 @@
 }
 
 
+
 /* =====================================================================================
    SIDEBAR
 ===================================================================================== */
 
-/* Main sidebar container */
+/* Customize sidebar width, background color, and visibility */
 section[data-testid="stSidebar"] {
     width: 320px !important;
     background-color: #0f172a !important;
@@ -34,14 +35,14 @@ section[data-testid="stSidebar"] {
     will-change: transform;
 }
 
-/* Inner sidebar wrapper */
+/* Ensure sidebar inner container inherits background styling */
 section[data-testid="stSidebar"] > div {
     background-color: inherit !important;
     opacity: 1 !important;
     transition: opacity 0.12s ease-in-out !important;
 }
 
-/* Remove default Streamlit background layers */
+/* Make sidebar navigation and content blocks transparent */
 section[data-testid="stSidebar"]
 [data-testid="stSidebarNav"],
 section[data-testid="stSidebar"]
@@ -49,12 +50,12 @@ section[data-testid="stSidebar"]
     background-color: transparent !important;
 }
 
-/* Apply sidebar entrance animation */
+/* Apply sidebar entrance animation to all sidebar elements */
 section[data-testid="stSidebar"] * {
     animation: sidebarIn 0.16s ease-out;
 }
 
-/* Sidebar animation keyframes */
+/* Sidebar slide-in animation effect */
 @keyframes sidebarIn {
     from {
         opacity: 0.6;
@@ -68,11 +69,12 @@ section[data-testid="stSidebar"] * {
 }
 
 
+
 /* =====================================================================================
    SIDEBAR BUTTONS
 ===================================================================================== */
 
-/* Sidebar collapse button */
+/* Customize sidebar collapse button appearance */
 [data-testid="stSidebarCollapseButton"] {
     display: flex !important;
     opacity: 1 !important;
@@ -82,12 +84,12 @@ section[data-testid="stSidebar"] * {
     margin-left: 6px !important;
 }
 
-/* Collapse button hover state */
+/* Keep collapse button fully visible on hover */
 [data-testid="stSidebarCollapseButton"]:hover {
     opacity: 1 !important;
 }
 
-/* Sidebar expand button */
+/* Customize expand sidebar button positioning and spacing */
 [data-testid="stExpandSidebarButton"] {
     position: relative !important;
     left: 10px;
@@ -95,35 +97,18 @@ section[data-testid="stSidebar"] * {
     border-radius: 8px !important;
 }
 
-
+/* Add spacing around the main content container */
 [data-testid="stMainBlockContainer"] {
   margin: 2rem 0 5.2rem 0;
 }
 
-
-/* =====================================================================================
-   MAIN BACKGROUND
-===================================================================================== */
-
-[data-testid="stAppViewContainer"] {
-    background-color: #0f172a !important;
-}
-
-
-/* =====================================================================================
-   TOOLBAR
-===================================================================================== */
-
-[data-testid="stToolbar"] {
-    right: 1rem;
-}
 
 
 /* =====================================================================================
    BUTTONS
 ===================================================================================== */
 
-/* Main button structure */
+/* Global button styling */
 .stButton button {
     width: 100% !important;
     min-height: 38px !important;
@@ -139,14 +124,14 @@ section[data-testid="stSidebar"] * {
     transition: all 0.2s ease;
 }
 
-/* Button hover effect */
+/* Button hover animation and background effect */
 .stButton button:hover {
     color: inherit !important;
     background-color: #2563eb !important;
     transform: translateY(-1px);
 }
 
-/* Button content wrapper */
+/* Align button content horizontally */
 .stButton > button > div {
     display: flex !important;
     align-items: center !important;
@@ -154,7 +139,7 @@ section[data-testid="stSidebar"] * {
     width: 100% !important;
 }
 
-/* Reset paragraph spacing inside buttons */
+/* Improve button text wrapping and spacing */
 .stButton button p {
     margin: 0 !important;
     padding: 0 !important;
@@ -164,7 +149,7 @@ section[data-testid="stSidebar"] * {
     line-height: 1.4 !important;
 }
 
-/* Markdown container inside buttons */
+/* Customize markdown text inside buttons */
 .stButton div.stMarkdownContainer {
     width: 100% !important;
     text-align: left !important;
@@ -172,11 +157,12 @@ section[data-testid="stSidebar"] * {
 }
 
 
+
 /* =====================================================================================
    NEW CHAT BUTTON
 ===================================================================================== */
 
-/* Increase button height and vertical padding */
+/* Increase size and spacing for the "New Chat" button */
 [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button {
     padding-top: 12px !important;
@@ -184,17 +170,19 @@ section[data-testid="stSidebar"] * {
     min-height: 60px !important;
 }
 
-/* Make new chat text semi-bold */
+/* Make "New Chat" button text bolder */
 [data-testid="stVerticalBlock"]:has(.new-chat-anchor)
 > div:nth-of-type(2) button p {
     font-weight: 600 !important;
 }
 
 
+
 /* =====================================================================================
    CHAT LIST
 ===================================================================================== */
 
+/* Align chat list buttons to the left */
 [data-testid="stVerticalBlock"]:has(.chat-list-anchor)
 .stButton button {
     display: flex !important;
@@ -203,11 +191,13 @@ section[data-testid="stSidebar"] * {
     text-align: left !important;
 }
 
+/* Ensure all chat list content is left-aligned */
 [data-testid="stVerticalBlock"]:has(.chat-list-anchor)
 .stButton button * {
     text-align: left !important;
 }
 
+/* Expand chat list button content to full width */
 [data-testid="stVerticalBlock"]:has(.chat-list-anchor)
 .stButton button > div {
     display: flex !important;
@@ -216,12 +206,12 @@ section[data-testid="stSidebar"] * {
     width: 100% !important;
 }
 
-/* Tooltip position */
+/* Adjust tooltip position */
 div[data-baseweb="tooltip"][style] {
     transform: translate(20px, -6px) !important;
 }
 
-/* Tooltip bubble */
+/* Customize tooltip layout and wrapping */
 div[data-baseweb="tooltip"] > div {
     display: flex !important;
     flex-direction: column !important;
@@ -234,35 +224,12 @@ div[data-baseweb="tooltip"] > div {
 }
 
 
-/* =====================================================================================
-   INLINE MENU BUTTON
-===================================================================================== */
-
-/* Center inline button content */
-[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
-.stButton > button > div {
-    justify-content: center !important;
-}
-
-/* Center align inline menu text */
-[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
-.stButton div.stMarkdownContainer p {
-    text-align: center !important;
-    margin: 0 auto !important;
-}
-
-/* Use semi-bold font for inline menu buttons */
-[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
-button p {
-    font-weight: 600 !important;
-}
-
 
 /* =====================================================================================
    CHAT MESSAGE
 ===================================================================================== */
 
-/* Main chat message container */
+/* Style chat message containers */
 [data-testid="stChatMessage"] {
     padding: 18px !important;
     border-radius: 18px !important;
@@ -271,56 +238,71 @@ button p {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
 }
 
-/* Force all text to inherit parent color */
+/* Ensure all chat message content inherits text color */
 [data-testid="stChatMessage"] * {
     color: inherit !important;
 }
 
 
-/* =====================================================================================
-   CHAT INPUT FIELD
-===================================================================================== */
-
-/* Main chat input wrapper */
-[data-testid="stChatInput"] {
-    border-radius: 14px !important;
-    overflow: hidden !important;
-}
-
-/* Inner textarea or contenteditable styling */
-[data-testid="stChatInput"] > div,
-[data-testid="stChatInput"] div[contenteditable="true"],
-[data-testid="stChatInput"] textarea {
-    border-radius: 14px !important;
-}
-
 
 /* =====================================================================================
-   CHAT SUBMIT BUTTON
+   INLINE MENU BUTTON
 ===================================================================================== */
 
-/* Default submit button state */
-[data-testid="stChatInputSubmitButton"] {
-    background: #354359 !important;
-    color: white !important;
-    opacity: 0.6;
-    transition: all 0.2s ease;
+/* Center inline menu button content */
+[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
+.stButton > button > div {
+    justify-content: center !important;
 }
 
-/* Active state when chat input is focused */
-[data-testid="stChatInput"]:focus-within
-[data-testid="stChatInputSubmitButton"] {
-    background: #222d40 !important;
-    color: white !important;
-    opacity: 1 !important;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+/* Center inline menu button text */
+[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
+.stButton div.stMarkdownContainer p {
+    text-align: center !important;
+    margin: 0 auto !important;
 }
+
+/* Make inline menu button text bold */
+[data-testid="stVerticalBlock"]:has(.inline-menu-anchor)
+button p {
+    font-weight: 600 !important;
+}
+
+
+
+/* =====================================================================================
+   CLOSE CHAT BUTTON
+===================================================================================== */
+
+/* Add bottom spacing for delete chat button */
+[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
+.stButton button {
+    margin-bottom: 2.5rem;
+}
+
+/* Center delete chat button content */
+[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
+.stButton button > div {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+/* Make delete chat button text bold */
+[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
+.stButton button p {
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
 
 
 /* =====================================================================================
    FOOTER
 ===================================================================================== */
 
+/* Fixed footer styling */
 .footer {
     position: fixed;
     bottom: 0;
@@ -333,62 +315,43 @@ button p {
 }
 
 
+
 /* =====================================================================================
-   CLOSE CHAT BUTTON
+   CHAT INPUT FIELD
 ===================================================================================== */
 
-/* Main button */
-.close-chat-anchor + div .stButton button {
-    min-height: 42px !important;
-    border-radius: 12px !important;
-    border: 1px solid #475569 !important;
-    background: #1e293b !important;
-    transition: all 0.18s ease !important;
+/* Add rounded corners to chat input container */
+[data-testid="stChatInput"] {
+    border-radius: 14px !important;
+    overflow: hidden !important;
 }
 
-/* Hover effect */
-.close-chat-anchor + div .stButton button:hover {
-    background: #dc2626 !important;
-    border-color: #ef4444 !important;
-    transform: translateY(-1px);
+/* Apply rounded corners to chat input elements */
+[data-testid="stChatInput"] > div,
+[data-testid="stChatInput"] div[contenteditable="true"],
+[data-testid="stChatInput"] textarea {
+    border-radius: 14px !important;
 }
 
-/* Center content horizontally + vertically */
-.close-chat-anchor + div .stButton > button > div {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    height: 100% !important;
-}
-
-/* Text styling */
-.close-chat-anchor + div .stButton button p {
-    margin: 0 !important;
-    font-weight: 600 !important;
-    text-align: center !important;
-    line-height: 1 !important;
-}
 
 
 /* =====================================================================================
-   CLOSE CHAT BUTTON
+   CHAT SUBMIT BUTTON
 ===================================================================================== */
 
-[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
-.stButton button {
-    margin-bottom: 2.5rem;
+/* Default submit button styling */
+[data-testid="stChatInputSubmitButton"] {
+    background: #354359 !important;
+    color: white !important;
+    opacity: 0.6;
+    transition: all 0.2s ease;
 }
 
-[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
-.stButton button > div {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-}
-
-[data-testid="stVerticalBlock"]:has(.delete-chat-anchor)
-.stButton button p {
-    font-weight: 700 !important;
-    margin: 0 !important;
+/* Highlight submit button when chat input is focused */
+[data-testid="stChatInput"]:focus-within
+[data-testid="stChatInputSubmitButton"] {
+    background: #222d40 !important;
+    color: white !important;
+    opacity: 1 !important;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
 }

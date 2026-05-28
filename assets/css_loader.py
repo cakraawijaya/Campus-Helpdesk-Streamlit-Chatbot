@@ -1,3 +1,4 @@
+# Import Path for file system handling
 from pathlib import Path
 
 # Active custom CSS theme

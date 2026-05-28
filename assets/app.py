@@ -1,9 +1,22 @@
+# Import the operating system module
 import os
+
+# Import UUID module for generating unique chat IDs
 import uuid
+
+# Import time module for timestamps and typing delay effects
 import time
+
+# Import regular expression module
 import re
+
+# Import Streamlit framework
 import streamlit as st
+
+# Import Google Gemini AI SDK
 from google import genai
+
+# Import custom CSS loader function
 from css_loader import load_all_css
 
 
@@ -34,8 +47,7 @@ if "chats" not in st.session_state:
     # Generate a unique ID for the first chat
     first_chat_id = str(uuid.uuid4())
 
-    # Store the first chat data inside session_state
-    # with a default title and empty message list
+    # Initialize chat storage in session state
     st.session_state.chats = {
         first_chat_id: {
             "title": "New Chat",
@@ -44,7 +56,7 @@ if "chats" not in st.session_state:
         }
     }
 
-    # Set the first chat as the currently active chat
+    # Set the first chat as the active conversation
     st.session_state.current_chat = first_chat_id
 
 
@@ -155,6 +167,7 @@ with st.sidebar:
         reverse=True
     )
 
+    # Loop through all available chats
     for chat_id, chat_data in sorted_chats:
 
         # Hide empty chats
@@ -173,15 +186,22 @@ with st.sidebar:
         # First user prompt for tooltip
         first_user_prompt = ""
 
+        # Loop through all messages inside the chat
         for msg in chat_data["messages"]:
 
+            # Check whether the message was sent by the user
             if msg["role"] == "user":
+
+                # Store the first user message for tooltip preview
                 first_user_prompt = msg["content"]
+
+                # Stop looping after finding the first user message
                 break
 
         # Chat item container
         chat_container = st.container()
 
+        # Create a container for each chat item
         with chat_container:
 
             # HTML anchor for custom styling
@@ -213,42 +233,63 @@ current_chat = st.session_state.chats.get(
     st.session_state.current_chat
 )
 
+# Retrieve messages from the current chat
 messages = current_chat["messages"] if current_chat else []
+
 
 
 # =====================================================================================
 # TOP ACTION BAR
 # =====================================================================================
 
-# Show delete button only if chat has messages
+# Check whether the current chat contains messages
 if current_chat and len(current_chat["messages"]) > 0:
         
-    # Close chat container
+    # CLOSE CHAT BUTTON
+    # Create a container for the close chat button
     close_chat_container = st.container()
 
+    # Add components inside the close chat container
     with close_chat_container:
 
             # HTML anchor for custom styling
             st.markdown('<div class="delete-chat-anchor"></div>', unsafe_allow_html=True)
 
+            # Create the close chat button
             clicked = st.button("Tutup Obrolan\u00A0\u00A0✖", key="delete_current_chat")
 
+            # Check whether the close chat button was clicked
             if clicked:
                 
+                # Store the ID of the chat to be deleted
                 deleted_chat = st.session_state.current_chat
+
+                # Remove the selected chat from session state
                 del st.session_state.chats[deleted_chat]
 
+                # Check whether there are remaining chats
                 if len(st.session_state.chats) > 0:
+
+                    # Reset the active chat selection
                     st.session_state.current_chat = None
+
+                # If no chats remain, create a new empty chat
                 else:
+
+                    # Generate a new chat ID
                     new_chat_id = str(uuid.uuid4())
+
+                    # Create a new default chat
                     st.session_state.chats[new_chat_id] = {
                         "title": "New Chat",
                         "messages": [],
                         "created_at": time.time()
                     }
+
+                    # Reset the current active chat
                     st.session_state.current_chat = None
 
+                # Refresh the application after deleting the chat
                 st.rerun()
 
 
@@ -381,7 +422,7 @@ if len(messages) == 0:
 # SHOW CHAT
 # =====================================================================================
 
-# Display all messages from the active chat history
+# Loop through all chat messages
 for message in messages:
 
     # Create a chat bubble based on the message role
@@ -433,10 +474,14 @@ if user_input:
 # Check whether there is a prompt to process
 if prompt:
 
+    # Store the current active chat ID
     chat_id = st.session_state.current_chat
 
     # SAVE USER MESSAGE
+    # Save the user message into chat history
     if chat_id:
+
+        # Add the user message into the current chat history
         st.session_state.chats[chat_id]["messages"].append({
             "role": "user",
             "content": prompt
@@ -543,7 +588,10 @@ if prompt:
 
 
     # SAVE ASSISTANT MESSAGE
+    # Save the assistant message into chat history
     if chat_id:
+
+        # Store the assistant response into the current chat history
         st.session_state.chats[chat_id]["messages"].append({
             "role": "assistant",
             "content": full_response
@@ -551,7 +599,10 @@ if prompt:
 
 
     # AUTO TITLE CHAT
+    # Automatically set the chat title from the first prompt
     if chat_id and st.session_state.chats[chat_id]["title"] == "New Chat":
+
+        # Update the chat title using the first 30 characters of the prompt
         st.session_state.chats[chat_id]["title"] = prompt[:30]
 
     # Refresh the app after the chat process is complete

@@ -109,7 +109,7 @@ with st.sidebar:
         font-weight: 900 !important;
         color: var(--text-color);
     ">
-        <strong>💬 Percakapan</strong>
+        <strong>Percakapan</strong>
     </div>
     """, unsafe_allow_html=True)
 
@@ -126,7 +126,7 @@ with st.sidebar:
         unsafe_allow_html=True)
 
         # Button to create a new conversation
-        if st.button("➕ Obrolan Baru", use_container_width=True):
+        if st.button("\u00A0\u00A0➕\u00A0\u00A0Obrolan Baru", use_container_width=True):
 
             # Generate a unique ID for the new chat
             new_chat_id = str(uuid.uuid4())
@@ -231,7 +231,7 @@ if current_chat and len(current_chat["messages"]) > 0:
             # HTML anchor for custom styling
             st.markdown('<div class="delete-chat-anchor"></div>', unsafe_allow_html=True)
 
-            clicked = st.button("Tutup Obrolan", key="delete_current_chat")
+            clicked = st.button("Tutup Obrolan\u00A0\u00A0✖", key="delete_current_chat")
 
             if clicked:
                 
